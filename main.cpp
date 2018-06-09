@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[]) {
     int input_fd = open(argv[1], O_RDONLY);
-    int output_fd = open(argv[2], O_RDWR);
+    int output_fd = open(argv[2], O_WRONLY);
     if( input_fd == -1 or output_fd == -1)
     {
         perror("Open Failed");

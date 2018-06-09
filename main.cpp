@@ -11,21 +11,21 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    off_t text_size = lseek(input_fd, 0, SEEK_END);
-    char buf[text_size];
+    long text_size = lseek(input_fd, 0, SEEK_END);
+    std::string result = "";
     int a;
 
-    for (int i = 0; i <= text_size; i++) {
+    for (long i = 0; i < text_size; i++) {
         lseek(input_fd, i, 0);
         read(input_fd, &a, 1);
         if (isalpha(a)) {
-            a = toupper(a);
+            result += toupper(a);
+        } else {
+            result += (char) a;
         }
-
-        buf[i] = (char) a;
     }
 
-    write(output_fd, buf, text_size);
+    write(output_fd, result.c_str(), text_size);
 
     close(input_fd);
     close(output_fd);
